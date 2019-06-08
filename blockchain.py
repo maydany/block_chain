@@ -66,7 +66,7 @@ class BlockChain:
 app = Flask(__name__)
 
 #CREATING THE BLOCK CHAIN
-blockchain = Blockchain()
+blockchain = BlockChain()
     
 #MINING A BLOCK
 @app.route('/mine_block', methods="[GET]")
@@ -83,8 +83,17 @@ def mine_block():
                 'prev_hash':block['prev_hash']}
     return jsonify(response), 200
     
-    
-    
+
+
+#GET THE FULL BLOCKCHAIN
+@app.route('/get_chain', methods="[GET]")
+def get_chain():
+    response = {'chain': blockchain.chain, 
+                'length':len(blockchain.chain)}
+    return jsonify(response), 200
+
+
+
     
     
     
