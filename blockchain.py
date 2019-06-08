@@ -43,3 +43,48 @@ class BlockChain:
         encoded_block = json.dumps(block, sort_key = True).encode()
         return hashlib.sha256(encoded_block).hexdigest() 
         
+    def is_chain_valid(self, chain):
+        prev_block = chain[0]
+        block_index = 1
+        while block_index < len(chain):
+            block = chain[block_index]
+            if block['prev_hash'] != self.hash(prev_block):
+                return False
+            prev_nounce = prev_block['nounce']
+            nounce = block['nounce']
+            hash_operation = hashlib.sha256(str(nounce**2 - prev_nounce**2).encode()).hexdigest()
+            if hash_operation[:4] != '0000':
+                return False
+            prev_block = block
+            block_index += 1
+            return True
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
