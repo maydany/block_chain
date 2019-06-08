@@ -24,4 +24,6 @@ class BlockChain:
                  'prev_hash': prev_hash}
         self.chain.append(block)
         return block
-        
+    
+    def get_prev_block(self):
+        return self.chain[-1]
