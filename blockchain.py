@@ -38,3 +38,8 @@ class BlockChain:
             else:
                 new_nounce += 1
         return new_nounce
+    
+    def hash(self, block):
+        encoded_block = json.dumps(block, sort_key = True).encode()
+        return hashlib.sha256(encoded_block).hexdigest() 
+        
