@@ -40,7 +40,7 @@ class BlockChain:
         return new_nounce
     
     def hash(self, block):
-        encoded_block = json.dumps(block, sort_key = True).encode()
+        encoded_block = json.dumps(block, sort_keys = True).encode()
         return hashlib.sha256(encoded_block).hexdigest() 
         
     def is_chain_valid(self, chain):
@@ -69,7 +69,7 @@ app = Flask(__name__)
 blockchain = BlockChain()
     
 #MINING A BLOCK
-@app.route('/mine_block', methods="[GET]")
+@app.route('/mine_block', methods=['GET'])
 def mine_block():
     prev_block = blockchain.get_prev_block()
     prev_nounce = prev_block['nounce']
@@ -86,7 +86,7 @@ def mine_block():
 
 
 #GET THE FULL BLOCKCHAIN
-@app.route('/get_chain', methods="[GET]")
+@app.route('/get_chain', methods=['GET'])
 def get_chain():
     response = {'chain': blockchain.chain, 
                 'length':len(blockchain.chain)}
@@ -95,7 +95,8 @@ def get_chain():
 
 
     
-    
+#RUN THE APP
+app.run(host = '0.0.0.0', port = 5000)
     
     
     
