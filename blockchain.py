@@ -1,7 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jun  8 13:29:34 2019
+# Create a plain block chain
+ 
+#Requirements
+#Flask==0.12.2
 
-@author: ishlo
-"""
+#the libraries import
+import datetime
+import hashlib
+import json
+from flask import Flask, jsonify
+
+#BLOCK CHAIN INIT
 
