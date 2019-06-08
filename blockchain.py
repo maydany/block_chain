@@ -1,9 +1,9 @@
-# Create a plain block chain
+# CREATE A PLAIN BLOCK CHAIN
  
 #Requirements
 #Flask==0.12.2
 
-#the libraries import
+#IMPORT THE LIBRARIES
 import datetime
 import hashlib
 import json
@@ -59,16 +59,29 @@ class BlockChain:
             block_index += 1
             return True
     
+
+# MINING BLOCK CHAIN
     
+#CREATING A WEB APP
+app = Flask(__name__)
+
+#CREATING THE BLOCK CHAIN
+blockchain = Blockchain()
     
-    
-    
-    
-    
-    
-    
-    
-    
+#MINING A BLOCK
+@app.route('/mine_block', methods="[GET]")
+def mine_block():
+    prev_block = blockchain.get_prev_block()
+    prev_nounce = prev_block['nounce']
+    nounce = blockchain.proof_of_work(prev_nounce)
+    prev_hash = blockchain.hash(prev_block)
+    block = blockchain.create_block(nounce, prev_hash)
+    response = {'message': 'congratulations, you just mined a block!',
+                'index':block['index'],
+                'timestamp': block['timestamp'],
+                'nounce': block['nounce'],
+                'prev_hash':block['prev_hash']}
+    return jsonify(response), 200
     
     
     
